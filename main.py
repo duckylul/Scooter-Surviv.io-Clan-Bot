@@ -29,6 +29,11 @@ async def scrim_custom(ctx: commands.Context):
     """In progress?"""
  
     try:   
+        #Asks for which channel to send message too
+        await ctx.send("What channel do you want to send too, please put your channel id that you are sending too!")
+
+        channel_scrim = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
+    
         #Asks for time of the scrim
         await ctx.send("What is the time of the scrim? ")
 
@@ -48,7 +53,8 @@ async def scrim_custom(ctx: commands.Context):
         await ctx.send("Where is the code or where to find it??")
 
         code_scrim = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
-
+        
+        #Asks for extra information
         await ctx.send("Additional Information? ")
 
         additional_scrim = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
@@ -58,7 +64,13 @@ async def scrim_custom(ctx: commands.Context):
 
     
     else:
+        #Getting channel to send to!
+
+        channel = bot.get_channel(int(channel_scrim.content))
+
         #Making the custom embed
+
+
         scrim_role = get(ctx.guild.roles, name='Scrim Ping')
         await ctx.send(f"{scrim_role.mention}") 
 
@@ -73,8 +85,9 @@ async def scrim_custom(ctx: commands.Context):
         embed.add_field(name="Code:", value="**"+code_scrim.content+"**", inline=False)
 
         embed.add_field(name="Additional Information:", value="**"+additional_scrim.content+"**", inline=False)
-
-        await ctx.send(embed=embed)
+         
+        await channel.send(f"{scrim_role.mention}")  
+        await channel.send(embed=embed)
 
 
 my_secret = os.environ['TOKEN']
