@@ -1,0 +1,65 @@
+from discord.ext import commands, tasks
+import discord
+import string
+import sys
+import asyncio
+import random
+import os
+import requests
+import time
+from discord.utils import get
+
+
+
+bot = commands.Bot(command_prefix="!")
+
+
+@bot.event
+async def on_ready():
+    print(f"{bot.user} is ready! Go scooter!!")
+
+
+#Orginal: async def scrim_info(ctx: commands.Context, *, time: str, *args)
+
+
+
+@bot.command()
+async def scrim_info(ctx: commands.Context):
+        """In progress?"""
+        #Asks for time of the scrim
+        await ctx.send("What is the time of the scrim? ")
+
+        time_scrim = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
+         
+        #Asks for what mode will be playing in the Scrim
+        await ctx.send("What mode is it? ")
+
+        mode_scrim = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
+
+        #Asks for what type, like 1v1s
+        await ctx.send("What type of scrim(1v1, 2v2, etc)?")
+
+        ytpe_scrim = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
+
+        #Asks where to find the code
+        await ctx.send("Where is the code?")
+
+
+         
+        #Making the custom embed
+        scrim_role = get(ctx.guild.roles, name='Scrim Ping')
+        await ctx.send(f"{scrim_role.mention}") 
+
+        embed = discord.Embed(title="Scrim Info", description=scrim_role.mention, colour=0x87CEEB)
+      
+        embed.add_field(name="Time:", value="**"+time_scrim.content+"**", inline=False)
+
+        embed.add_field(name="Mode:", value="**"+mode_scrim.content+"**", inline=False)
+
+        embed.add_field(name="Type:", value="**"+type_scrim.content+"**", inline=False)
+
+        await ctx.send(embed=embed)
+
+
+my_secret = os.environ['TOKEN']
+bot.run(my_secret)
