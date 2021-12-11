@@ -24,7 +24,7 @@ async def on_ready():
 
 
 @bot.command()
-async def scrim_info(ctx: commands.Context):
+async def scrim_custom(ctx: commands.Context):
         """In progress?"""
         #Asks for time of the scrim
         await ctx.send("What is the time of the scrim? ")
@@ -39,10 +39,17 @@ async def scrim_info(ctx: commands.Context):
         #Asks for what type, like 1v1s
         await ctx.send("What type of scrim(1v1, 2v2, etc)?")
 
-        ytpe_scrim = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
+        type_scrim = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
 
         #Asks where to find the code
-        await ctx.send("Where is the code?")
+        await ctx.send("Where is the code or where to find it??")
+
+        code_scrim = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
+
+        await ctx.send("Additional Information? ")
+
+        additional_scrim = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
+
 
 
          
@@ -57,6 +64,10 @@ async def scrim_info(ctx: commands.Context):
         embed.add_field(name="Mode:", value="**"+mode_scrim.content+"**", inline=False)
 
         embed.add_field(name="Type:", value="**"+type_scrim.content+"**", inline=False)
+
+        embed.add_field(name="Code:", value="**"+code_scrim.content+"**", inline=False)
+
+        embed.add_field(name="Additional Information:", value="**"+additional_scrim.content+"**", inline=False)
 
         await ctx.send(embed=embed)
 
