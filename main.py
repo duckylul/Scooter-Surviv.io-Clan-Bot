@@ -22,6 +22,7 @@ async def on_ready():
 #Orginal: async def scrim_info(ctx: commands.Context, *, time: str, *args)
 
 @bot.command()
+@commands.is_owner()
 async def setstatus(ctx: commands.Context):
     """Set the bot's status."""
 
