@@ -25,7 +25,10 @@ async def on_ready():
 
 @bot.command()
 async def scrim_custom(ctx: commands.Context):
-        """In progress?"""
+     
+    """In progress?"""
+ 
+    try:   
         #Asks for time of the scrim
         await ctx.send("What is the time of the scrim? ")
 
@@ -50,9 +53,11 @@ async def scrim_custom(ctx: commands.Context):
 
         additional_scrim = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
 
+    except asyncio.TimeoutError:
+        await ctx.send("Oops! You took to long to answer! Try again!")
 
-
-         
+    
+    else:
         #Making the custom embed
         scrim_role = get(ctx.guild.roles, name='Scrim Ping')
         await ctx.send(f"{scrim_role.mention}") 
