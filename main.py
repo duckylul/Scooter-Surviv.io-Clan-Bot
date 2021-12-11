@@ -21,6 +21,29 @@ async def on_ready():
 
 #Orginal: async def scrim_info(ctx: commands.Context, *, time: str, *args)
 
+@bot.command()
+async def setstatus(ctx: commands.Context):
+    """Set the bot's status."""
+
+    await ctx.send("Type the bot's status: ")
+
+    status = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
+    
+    await ctx.send("What type of status(Game, Watching, Listening)")
+
+    status_type = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
+    
+    if status_type.content.lower() == "game":
+        await bot.change_presence(activity=discord.Game(name=status.content))
+
+    if status_type.content.lower() == "watching":
+        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=status.content))
+
+    if status_type.content.lower() == "listening":
+        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.listening, name=status.content))
+   
+    
+
 
 
 @bot.command()
@@ -72,7 +95,7 @@ async def scrim_custom(ctx: commands.Context):
 
 
         scrim_role = get(ctx.guild.roles, name='Scrim Ping')
-        await ctx.send(f"{scrim_role.mention}") 
+        
 
         embed = discord.Embed(title="Scrim Info", description=scrim_role.mention, colour=0x87CEEB)
       
