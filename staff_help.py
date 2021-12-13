@@ -25,3 +25,8 @@ class staff_help_embed(commands.Cog):
         
         staff_embed.add_field(name="!scrim_custom_embed",
 		             value="Generate 1 unchecked nitro/nitro classic code")
+
+
+
+def setup(bot: commands.Bot):
+    bot.add_cog(satff_help_embed(bot))
