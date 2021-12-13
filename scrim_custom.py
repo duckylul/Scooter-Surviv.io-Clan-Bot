@@ -102,7 +102,7 @@ class scrim_custom_embed(commands.Cog):
         elif isinstance(error, commands.error.MissingRole):                
             message = f"You need to make a assign the role called 'Scrim Hoster'"
         else:
-            continue
+            return
 
         await ctx.send(message)  
 
