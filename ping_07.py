@@ -20,7 +20,7 @@ class ping_07(commands.Cog):
 
 
     @bot.command()
-    async def ping(ctx: commands.Context):   
+    async def ping(self, ctx: commands.Context):   
        start_time = time.time()
        message = await ctx.send("Testing Ping...")
        end_time = time.time()
