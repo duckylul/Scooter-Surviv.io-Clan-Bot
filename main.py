@@ -47,6 +47,7 @@ async def setstatus(ctx: commands.Context):
    
     
 @bot.command()
+@commands.has_permissions(manage_channels=True, manage_roles=True)
 async def scrim_custom_enable(ctx: commands.Context, user: discord.Member):
     """
     A command that enables scrim_custom command.
@@ -54,9 +55,13 @@ async def scrim_custom_enable(ctx: commands.Context, user: discord.Member):
     
     role = discord.utils.find(lambda r: r.name == 'Scrim Hoster', ctx.message.guild.roles)
     if role not in user.roles:
-        await ctx.send("You either do not have the role 'Scrim Hoster' in your server, or you do not have the role to enable this command. Once you have done that the command will be avaliable to you!")
+        embed = discord.Embed(title="You either do not have the role 'Scrim Hoster' in your server, or you do not have the role to enable this command. Once you have the role you can use the command!", colour=0x87CEEB)
+
+        await ctx.send(embed=embed)
     else:
-        await ctx.send("The command is avaliable to you!")
+        embed = discord.Embed(title="The command '!scrim_custom' is avaliable to you!", colour=0x87CEEB)
+        
+        await ctx.send(embed=embed)
 
 @bot.command()
 @commands.has_role("Scrim Hoster")
