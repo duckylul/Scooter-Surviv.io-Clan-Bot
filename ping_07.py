@@ -9,7 +9,7 @@ import requests
 import time
 from discord.utils import get
 
-
+bot = commands.Bot(command_prefix="!")
 
 
 class ping_07(commands.Cog):
@@ -31,5 +31,5 @@ class ping_07(commands.Cog):
 
 
 
-def setup(bot: commands.Bot)
+def setup(bot: commands.Bot):
     bot.add_cog(ping_07(bot))
