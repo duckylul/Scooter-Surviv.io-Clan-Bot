@@ -7,6 +7,12 @@ authors = ["Your Name <you@example.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 discord = "^1.7.3"
+discord-ui = "^5.1.5"
+components = "^1.2.8"
+discord-components = "^2.1.2"
+discord-interactions = "^0.3.0"
+"discord-interactions.py" = "^0.0.8"
+Flask = "^2.0.2"
 
 [tool.poetry.dev-dependencies]
 

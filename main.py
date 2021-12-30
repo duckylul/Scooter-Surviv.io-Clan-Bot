@@ -8,17 +8,23 @@ import os
 import requests
 import time
 from discord.utils import get
+from discord_components import DiscordComponents, Button, ButtonStyle, ComponentsBot
+from datetime import datetime
+from keep_alive import keep_alive
 
-
-
-bot = commands.Bot(command_prefix="!")
+bot = ComponentsBot(command_prefix='!')
 
 
 bot.load_extension("ping_07")
 
+bot.load_extension("youtube_suggestions")
+
+bot.load_extension("rules")
+
 @bot.event
 async def on_ready():
     print(f"{bot.user} is ready! Go scooter!!")
+    print(discord.__version__)
 
 
 #Orginal: async def scrim_info(ctx: commands.Context, *, time: str, *args)
@@ -130,7 +136,70 @@ async def scrim_custom(ctx: commands.Context):
         await channel.send(f"{scrim_role.mention}")  
         await channel.send(embed=embed)
 
+@bot.command()
+async def youtube_requests(ctx: commands.Context):
+    try:   
+        
+        await ctx.send("What is the name of the surviv.io youtuber you are requesting?")
+        youtuber_name = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
+
+        await ctx.send("What is the link of the surviv.io youtuber you are requesting?")
+        youtuber_link = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
+
+    except asyncio.TimeoutError:
+        await ctx.send("Oops! You took to long to answer! Try again!")
+
+    else:
+        await ctx.send("Your request will be looked over soon!")
+        user_name = bot.user.name
+        timestamp = str(datetime.now())
+        with open('youtube_requests.txt', 'w') as f:
+               f.write(user_name.content + " has requested a youtuber named" + youtuber_name.content + "and the link is: " + youtuber_link.content+ "Please review it and add it to the suggestions.py if it's appropiate! Time requested: " + timestamp)
+               f.close()
+@bot.command()
+async def helpme(ctx: commands.Context):
+    advice = ["Get help", "Adopt a duck", "Move to another country", "Rob a bank!", "Eat a spider", "Go see a witch", "Do yoga on a volcano", "Watch a chessy romantic show", "Get a girlfriend", "Play surviv.io", "Watch Mrbeast", "Look up Hom Tolland", "Lock yourself in a cabinent", "Give $1 to a random stranger!"]
+
+    try:
+      embed = discord.Embed(title="What seems to be the problem? ", color=0xf47fff)
+      
+      await ctx.send(embed=embed)
+
+      problem = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
+    
+    except asyncio.TimeoutError:
+        await ctx.send("You took too long to answer, looks like you don't want my advice :((")
+    
+    else:
+        problem = problem.content
+        
+       
+        advice_rando=random.choice(advice)
+        embed = discord.Embed(title = f"**Response to: `{problem}`  **", color=0xf47fff)
+        embed.add_field(name="**Scooter's Advice**",
+		             value=f"{advice_rando}")
+        
+        await ctx.send(embed=embed)
+
+@bot.command()
+async def rate(ctx: commands.Context, user: discord.Member):
+     
+    yeet = ["Dumb", 'gay', 'noob', 'smart', 'chicken','witch', 'bot', 'human', 'duck', 'coward']
+     
+    
+
+    username = user.name
+    
+    things = random.choice(yeet)
+    val = random.randint(1,100)
+    embed = discord.Embed(title=f"Rating {user}", description="Rate", colour=0x87CEEB)
+
+    embed.add_field(name="Scooter's rating:", value=f"{username} is %{val} {things}", inline=False)
+
+    
+    await ctx.send(embed=embed)  
 
 
+keep_alive()        
 my_secret = os.environ['TOKEN']
 bot.run(my_secret)

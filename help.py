@@ -12,7 +12,7 @@ from discord.utils import get
 bot = commands.Bot(command_prefix="!")
 
 
-class staff_help_embed(commands.Cog):
+class help_embed(commands.Cog):
     """Embed for staff help"""
 
     def __init__(self, bot: commands.Bot):
@@ -20,13 +20,13 @@ class staff_help_embed(commands.Cog):
 
 
     @bot.command()
-    async def staff_help(self, ctx: commands.Context):   
+    async def help(self, ctx: commands.Context):   
         staff_embed = discord.Embed(title="Staff Help For Scooter", color=0xf47fff)
         
-        staff_embed.add_field(name="!scrim_custom_embed",
-		             value="Generate 1 unchecked nitro/nitro classic code")
+        staff_embed.add_field(name="!scrim_custom",
+		             value="Makes custom embed for Surviv.io scrims!")
 
 
 
 def setup(bot: commands.Bot):
-    bot.add_cog(satff_help_embed(bot))
+    bot.add_cog(help_embed(bot))
