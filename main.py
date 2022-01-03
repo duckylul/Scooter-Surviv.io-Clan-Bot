@@ -13,13 +13,15 @@ from datetime import datetime
 from keep_alive import keep_alive
 
 bot = ComponentsBot(command_prefix='!')
-
+bot.remove_command("help")
 
 bot.load_extension("ping_07")
 
 bot.load_extension("youtube_suggestions")
 
 bot.load_extension("rules")
+
+bot.load_extension("help")
 
 @bot.event
 async def on_ready():
@@ -137,26 +139,6 @@ async def scrim_custom(ctx: commands.Context):
         await channel.send(embed=embed)
 
 @bot.command()
-async def youtube_requests(ctx: commands.Context):
-    try:   
-        
-        await ctx.send("What is the name of the surviv.io youtuber you are requesting?")
-        youtuber_name = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
-
-        await ctx.send("What is the link of the surviv.io youtuber you are requesting?")
-        youtuber_link = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
-
-    except asyncio.TimeoutError:
-        await ctx.send("Oops! You took to long to answer! Try again!")
-
-    else:
-        await ctx.send("Your request will be looked over soon!")
-        user_name = bot.user.name
-        timestamp = str(datetime.now())
-        with open('youtube_requests.txt', 'w') as f:
-               f.write(user_name.content + " has requested a youtuber named" + youtuber_name.content + "and the link is: " + youtuber_link.content+ "Please review it and add it to the suggestions.py if it's appropiate! Time requested: " + timestamp)
-               f.close()
-@bot.command()
 async def helpme(ctx: commands.Context):
     advice = ["Get help", "Adopt a duck", "Move to another country", "Rob a bank!", "Eat a spider", "Go see a witch", "Do yoga on a volcano", "Watch a chessy romantic show", "Get a girlfriend", "Play surviv.io", "Watch Mrbeast", "Look up Hom Tolland", "Lock yourself in a cabinent", "Give $1 to a random stranger!"]
 
@@ -184,7 +166,7 @@ async def helpme(ctx: commands.Context):
 @bot.command()
 async def rate(ctx: commands.Context, user: discord.Member):
      
-    yeet = ["Dumb", 'gay', 'noob', 'smart', 'chicken','witch', 'bot', 'human', 'duck', 'coward']
+    yeet = ["Dumb", 'gay', 'noob', 'smart', 'chicken','witch', 'bot', 'human', 'duck', 'coward', "dog"]
      
     
 

@@ -20,12 +20,17 @@ class help_embed(commands.Cog):
 
 
     @bot.command()
-    async def help(self, ctx: commands.Context):   
-        staff_embed = discord.Embed(title="Staff Help For Scooter", color=0xf47fff)
+    async def h(self, ctx: commands.Context):   
+        embed = discord.Embed(title="Help For Scooter", color=0xf47fff)
         
-        staff_embed.add_field(name="!scrim_custom",
-		             value="Makes custom embed for Surviv.io scrims!")
+        embed.add_field(name="!staff_help",
+		             value="Command only for staff! Help for the staff commands.")
 
+        embed.add_field(name="!funhelp",
+		             value="Help for some fun things scooter can do! Avaliable to everyone!")
+                
+
+        await ctx.send(embed=embed)
 
 
 def setup(bot: commands.Bot):
