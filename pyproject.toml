@@ -13,6 +13,8 @@ discord-components = "^2.1.2"
 discord-interactions = "^0.3.0"
 "discord-interactions.py" = "^0.0.8"
 Flask = "^2.0.2"
+bs4 = "^0.0.1"
+lxml = "^4.7.1"
 
 [tool.poetry.dev-dependencies]
 

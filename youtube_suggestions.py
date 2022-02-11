@@ -20,7 +20,7 @@ class components_py(commands.Cog):
    
 
     @commands.command()
-    async def youtube_sugesstions(self, ctx):
+    async def youtubesug(self, ctx):
 
       youtube_survivio = [
         "https://www.youtube.com/c/sv98gaming",#SV-98 Gaming
