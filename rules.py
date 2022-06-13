@@ -22,6 +22,7 @@ class rules_embed(commands.Cog):
     @bot.command()
     @commands.is_owner()
     async def rules(self, ctx: commands.Context):   
+        """This only for owners. Do !rules"""
         embed = discord.Embed(title="Rules", color=0xf47fff)
         
         embed.add_field(name="**1. Be respectful**",

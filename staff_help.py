@@ -20,14 +20,19 @@ class staff_help_embed(commands.Cog):
 
 
     @bot.command()
-    async def staff_help(self, ctx: commands.Context):   
+    async def shelp(self, ctx: commands.Context):   
+        
         embed = discord.Embed(title="Help For Scooter", color=0xf47fff)
         
-        embed.add_field(name="!scrim_custom",
-		             value="Makes a custom embed as your choice. It will ask you for what channel id to send at, mode, time, what time of scrim, and additional info! To enable this command do !scrim_custom_enable ")
+        embed.add_field(name="**!rate**",
+		             value="How to use? `ex. !rate @Ilikeducks`  You must ping a user you want to rate, then it rate that person! ex. @Ilikeducks is %99 a duck. This command is mainly use to make people laugh!!!")
 
-        embed.add_field(name="!scrim_custom_enable",
-		             value="Enables the scrim_custom. Must have in your server role Scrim Hoster and Scrim Ping for this to work. And the role must be assigned to you the Scrim Hoster to allow you to make the custom embed")
+        embed.add_field(name="!helpme",
+		             value="How to use? `ex. !helpme` This will ask you `What's wrong` then you will type in something. Then it will give it's personal advice :joy: ")
+
+        
+        embed.add_field(name="!scout",
+		             value=`"Warning: Command is still under construction. There is a few bugs with the **api** and sometimes will give you a new lobby sometimes no. This is still under testing.` How to use? `ex. !scout` This will ask you if you want to scout Classic solos, duos, or squads, or regular events. You choose one and it will send you an embed of what you told it to scout. Then it will ping you when it's time to join the new lobby!! ")
                 
 
         await ctx.send(embed=embed)

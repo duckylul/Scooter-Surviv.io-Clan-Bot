@@ -13,7 +13,7 @@ bot = commands.Bot(command_prefix="!")
 
 
 class ping_07(commands.Cog):
-    """Test API Discord Ping"""
+    """Test API Discord Ping. Do !ping to see the bot's latency"""
 
     def __init__(self, bot: commands.Bot):
         self.bot = bot

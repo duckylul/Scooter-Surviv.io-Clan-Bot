@@ -1,16 +1,13 @@
-# Scooter-Surviv.io-Clan-Bot
+# Scooter-Fun-Bot
 
-<h3 align="center">A Surviv.io Discord Bot</h3>
+<h3 align="center">A Surviv.io Fun Bot</h3>
 
-<p align="center">This is a bot that helps manage your surviv.io clan! Read below for more!!.</p>
+<p align="center">This is a bot that have some fun stuff. Still building.</p>
 
 ---
 
 # Features
-- Lets you create custom embeds for scrims to avoid you typing all the info out!
-- Also notifys people when there are scrims and clan wars!
-- Also can let you make a custom embed for clan wars.
-- Easy to change status to what ever you want!!
+- Coming Soon!
 
 
 ## Previews
