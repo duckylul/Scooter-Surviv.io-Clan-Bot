@@ -87,9 +87,9 @@ async def war_results(ctx: commands.Context):
         """Creates a war result embed with your specfic requirments."""
 
         
+        
 
-
-
+        team1_players = {}
     
         try: 
             
@@ -102,8 +102,39 @@ async def war_results(ctx: commands.Context):
            team2 = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
 
            await ctx.send("What's the score. First team - Second team(Example: 4-0, 4-1)")
+            
            score = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
 
+           team1 = team1.content  
+
+           #loop 
+           x = 0
+           while x == 0:
+              
+              
+             
+                
+              await ctx.send(f"Who played for {team1}. Note: Once you finished with all the players, say 'done' ")
+              players = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0)
+
+              players = players.content  
+
+              if players == 'done':
+                  x = 1
+ 
+              await ctx.send(f"How many rounds did {players} play?")
+
+
+              round = await bot.wait_for("message", check=lambda m: m.author == ctx.author and m.channel == ctx.channel, timeout=30.0) 
+
+              if players == 'done':
+                  x = 1
+
+              else:
+                  round = round.content
+                  team1_players[players]=round
+                  
+               
        
         
         except asyncio.TimeoutError:
@@ -111,13 +142,13 @@ async def war_results(ctx: commands.Context):
         
 
         else:
-            team1 = team1.content
+            
             team2 = team2.content
             score = score.content
             
-            embed = discord.Embed(title="War Results:",color=0xf47fff)
+            embed = discord.Embed(title=f"War Results: {team1} {score} {team2} ",color=0xf47fff)
         
-            embed.add_field(name=f"{team1} {score} {team2}                    ", value=None)
+             
 
 
             
